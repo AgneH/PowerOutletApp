@@ -1,5 +1,7 @@
 package com.example.agneh.poweroutletapp;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,10 +10,19 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    Fragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fragment = new HomeFR();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_content,fragment);
+        ft.commit();
+
     }
 
 
@@ -34,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    
 
 
 }
