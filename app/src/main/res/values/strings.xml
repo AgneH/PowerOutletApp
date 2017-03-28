@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PowerOutletApp</string>
+    <string name="app_name">Power Outlet</string>
+    <string name="menu_home_title">Home</string>
 </resources>
