@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context="com.example.agneh.poweroutletapp.AddMapFR">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.example.agneh.poweroutletapp.CommentFR">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,15 +13,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is add outlet map fragment"
+            android:text="This is comment fragment"
             android:textColor="@color/colorPrimary"
             android:layout_weight="80"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add this location"
-            android:id="@+id/btn_add_location"/>
 
     </LinearLayout>
 

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:background="#FFFFFF"
     tools:context="com.example.agneh.poweroutletapp.AddOutletFR">
 
     <LinearLayout
@@ -13,8 +15,39 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is add outlet fragment"
+            android:text="Coordinates: long,lat"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimary"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Title"
+            android:textSize="16sp"
+            android:id="@+id/editText" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:layout_weight="80"
+            android:inputType="textMultiLine"
+            android:gravity="top"
+            android:textSize="16sp"
+            android:id="@+id/editText2" />
+
+        <Button
+            android:text="Add picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_add_picture" />
+
+        <Button
+            android:text="Save outlet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_save_outlet" />
 
     </LinearLayout>
 

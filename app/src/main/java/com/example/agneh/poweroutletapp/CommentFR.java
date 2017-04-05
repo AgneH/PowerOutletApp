@@ -7,17 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by agneh on 2017-03-28.
+ * Created by agneh on 2017-04-05.
  */
 
-public class AddOutletFR extends Fragment {
-    public AddOutletFR() {
-        //required empty public constructor
+public class CommentFR extends Fragment{
+    public CommentFR() {
+        //empty constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_outlet, container, false);
+        return inflater.inflate(R.layout.fragment_comment, container, false);
     }
+
 }

@@ -1,21 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.agneh.poweroutletapp.DisplayOutletFR">
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp">
 
+            <TextView
+                android:text="Tittle"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/textView" />
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                app:srcCompat="@color/colorAccent"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
         <TextView
+            android:text="Desription. Bacon ipsum dolor amet bacon shoulder kevin cow brisket pork belly. Bresaola corned beef frankfurter ribeye pork meatloaf. Tri-tip tail beef ribs meatball, sirloin biltong cow andouille spare ribs hamburger corned beef ham brisket alcatra capicola."
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_marginRight ="10dp"
+            android:layout_marginTop="19dp" />
+        <Button
+            android:text="Write a comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is display outlet fragment"
-            android:textColor="@color/colorPrimary"/>
+            android:id="@+id/btn_write_comment" />
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/comment_container"></FrameLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:entries="@array/testArray"/>
     </LinearLayout>
 
-</FrameLayout>

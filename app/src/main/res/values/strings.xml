@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Power Outlet</string>
     <string name="menu_home_title">Home</string>
+    <string-array name="testArray">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+        <item>Item 5</item>
+    </string-array>
 </resources>

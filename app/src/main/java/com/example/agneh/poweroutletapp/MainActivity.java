@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddMap_Listener, AddMapFR.Map_AddOutlet_Listener{
 
     Fragment fragment;
 
@@ -45,7 +45,25 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    
+  //  @Override
+    public void addMapClicked() {
 
+        fragment = new AddMapFR();
 
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_content,fragment);
+        ft.addToBackStack(null);
+        ft.commit();
+
+    }
+
+    @Override
+    public void addOutletClicked() {
+        fragment = new AddOutletFR();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_content,fragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
 }
