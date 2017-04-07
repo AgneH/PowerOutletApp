@@ -52,7 +52,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback{
     public void onMapReady(GoogleMap googleMap) {
         //set map variable
         mMap = googleMap;
-        //  getAllOutlets();
+        getAllOutlets();
     }
 
 

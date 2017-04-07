@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddOu
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_content,fragment);
         ft.commit();
-
     }
 
 
