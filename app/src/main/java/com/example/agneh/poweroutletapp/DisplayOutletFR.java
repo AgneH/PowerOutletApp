@@ -50,6 +50,7 @@ public class DisplayOutletFR extends DialogFragment {
         String title = getArguments().getString("title");
         getDialog().setTitle(title);
         getDialog().setCanceledOnTouchOutside(true);
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AppTheme);
         getOutlet("8");
     }
 

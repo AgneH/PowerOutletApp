@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddMap_Listener, AddMapFR.Map_AddOutlet_Listener{
+public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddOutletMap_Listener, AddOutletMapFR.Map_AddOutlet_Listener{
 
     Fragment fragment;
 
@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddMa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //adds home fragment when activity is created
         fragment = new HomeFR();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddMa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //Ads Home button to the menu
         //No other choices as for today. TO DO: remove switch if we do not come across other options
         switch(item.getItemId()){
             case R.id.Home:
@@ -45,10 +46,10 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddMa
         return super.onOptionsItemSelected(item);
     }
 
-  //  @Override
-    public void addMapClicked() {
-
-        fragment = new AddMapFR();
+    //  @Override
+    public void addOutletMapClicked() {
+        //Adds Add Outlet Map fragment to the main window
+        fragment = new AddOutletMapFR();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_content,fragment);
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddMa
 
     @Override
     public void addOutletClicked() {
+        //Adds Add Outlet fragment to the main window
         fragment = new AddOutletFR();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -67,3 +69,4 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddMa
         ft.commit();
     }
 }
+
