@@ -19,12 +19,40 @@
             android:id="@+id/txtTitle" />
 
         <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="15dp"
+            android:layout_height="25dp"
+            app:srcCompat="@drawable/downvote"
+            android:id="@+id/imageView2"
+            android:layout_toRightOf="@+id/txtUpvotes"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="25dp"
+            app:srcCompat="@drawable/upvote"
+            android:id="@+id/imageView3"
+            android:layout_toRightOf="@+id/txtTitle"/>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtDownvotes"
+            android:layout_toRightOf="@+id/imageView2"/>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtUpvotes"
+            android:layout_toRightOf="@+id/imageView3"/>
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             app:srcCompat="@color/colorAccent"
             android:id="@+id/imaOutlet"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@+id/txtTitle"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
     <TextView

@@ -1,6 +1,8 @@
 package com.example.agneh.poweroutletapp;
 
 import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.HashMap;
 
 
@@ -84,11 +88,20 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
         }
         TextView txtTitle = (TextView) thisView.findViewById(R.id.txtTitle);
         TextView txtDescription = (TextView) thisView.findViewById(R.id.txtDescription);
+        TextView txtUpvotes = (TextView) thisView.findViewById(R.id.txtUpvotes);
+        TextView txtDownvotes = (TextView) thisView.findViewById(R.id.txtDownvotes);
         ListView lstComments = (ListView) thisView.findViewById(R.id.lstComments);
         CommentAdapter adapter = new CommentAdapter(outlet.getComments(),getContext());
         lstComments.setAdapter(adapter);
         txtTitle.setText(outlet.getTitle());
+        txtUpvotes.setText(Integer.toString(outlet.getUpvotes()));
+        txtDownvotes.setText(Integer.toString(outlet.getDownvotes()));
         txtDescription.setText(outlet.getDescription());
+
+        String picture = "http://lekrot.no/poapi/upload/"+outlet.getPicturename();
+        new DownloadImageTask((ImageView) thisView.findViewById(R.id.imaOutlet))
+                .execute(picture);
+
     }
 
     private class GetOutlet extends AsyncTask<String,String,Outlet> {
@@ -116,6 +129,32 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
         protected void onPostExecute(Outlet outlet) {
             super.onPostExecute(outlet);
             uiGetOutlet(outlet);
+        }
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView imgCamera;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.imgCamera = bmImage;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            imgCamera.setImageBitmap(result);
         }
     }
 
