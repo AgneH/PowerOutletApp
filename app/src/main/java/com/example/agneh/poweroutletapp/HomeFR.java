@@ -95,7 +95,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback{
     //TODO: implement choosing a specific dialog
     private void showOutletDialog(){
         FragmentManager fm = getFragmentManager();
-        DisplayOutletFR outletDialog = DisplayOutletFR.newInstance("Some Tittle");
+        DisplayOutletFR outletDialog = DisplayOutletFR.newInstance("8");
         outletDialog.show(fm, "fragment");
     }
 

@@ -1,18 +1,16 @@
 package com.example.agneh.poweroutletapp;
 
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.design.widget.CoordinatorLayout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
 
 
@@ -20,7 +18,7 @@ import java.util.HashMap;
  * Created by agneh on 2017-03-28.
  */
 
-public class DisplayOutletFR extends DialogFragment {
+public class DisplayOutletFR extends BottomSheetDialogFragment {
 
     private View thisView;
     public DisplayOutletFR() {
@@ -31,28 +29,45 @@ public class DisplayOutletFR extends DialogFragment {
         DisplayOutletFR frag = new DisplayOutletFR();
         Bundle args = new Bundle();
         // this is a way to send data to Dialog window
-        args.putString("title", title);
+        args.putString("outlet", title);
         frag.setArguments(args);
         return frag;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //inflate the layout for this fragment
-        thisView = inflater.inflate(R.layout.fragment_display_outlet, container,false);
-        return thisView;
-    }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // we do not necesserily need to fetch the title, but this shows how we can extract data
-        String title = getArguments().getString("title");
-        getDialog().setTitle(title);
-        getDialog().setCanceledOnTouchOutside(true);
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AppTheme);
-        getOutlet("8");
+    public void setupDialog(Dialog dialog, int style) {
+        //noinspection RestrictedApi
+        super.setupDialog(dialog, style);
+        thisView = View.inflate(getContext(), R.layout.fragment_display_outlet, null);
+        dialog.setContentView(thisView);
+
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) thisView.getParent()).getLayoutParams();
+        CoordinatorLayout.Behavior behavior = params.getBehavior();
+        String outlet = getArguments().getString("outlet");
+        getOutlet(outlet);
+
+        if( behavior != null && behavior instanceof BottomSheetBehavior ) {
+            ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
+            ((BottomSheetBehavior) behavior).setPeekHeight(150);
+        }
+
     }
+
+    private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
+
+        @Override
+        public void onStateChanged(@NonNull View bottomSheet, int newState) {
+            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                dismiss();
+            }
+        }
+
+        @Override
+        public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+        }
+    };
+
 
     public void getOutlet(String s){
         new GetOutlet().execute(s);
