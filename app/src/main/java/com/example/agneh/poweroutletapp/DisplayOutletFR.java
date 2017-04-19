@@ -9,6 +9,9 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -79,9 +82,11 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
         for(Comment comment : outlet.comments){
             Log.d("out",comment.toString());
         }
-        //TODO:Write code to set UI elements
         TextView txtTitle = (TextView) thisView.findViewById(R.id.txtTitle);
         TextView txtDescription = (TextView) thisView.findViewById(R.id.txtDescription);
+        ListView lstComments = (ListView) thisView.findViewById(R.id.lstComments);
+        CommentAdapter adapter = new CommentAdapter(outlet.getComments(),getContext());
+        lstComments.setAdapter(adapter);
         txtTitle.setText(outlet.getTitle());
         txtDescription.setText(outlet.getDescription());
     }

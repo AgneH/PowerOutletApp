@@ -1,5 +1,6 @@
 package com.example.agneh.poweroutletapp;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -7,12 +8,14 @@ import java.util.ArrayList;
  */
 
 public class Outlet {
-    String outletid,title,description,picture;
+    String outletid,title,description,picturename;
+    int pictureid;
     Double lat,lon;
     int upvotes;
     ArrayList<Comment> comments = new ArrayList<>();
 
-    public Outlet(String outletid,String title,double lat, double lon,String description){
+    public Outlet(String outletid,String title,double lat, double lon,String description,String picturename){
+        this.picturename = picturename;
         this.outletid = outletid;
         this.title=title;
         this.lat=lat;
@@ -26,6 +29,10 @@ public class Outlet {
             if(comment.getUpvote()==1)upvotes++;
             else upvotes--;
         }
+    }
+
+    public ArrayList<Comment> getComments(){
+        return comments;
     }
 
     public void addComment(Comment comment){
@@ -44,9 +51,11 @@ public class Outlet {
         return description;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getPicturename() {
+        return picturename;
     }
+
+    public int getPictureid() { return pictureid; }
 
     public Double getLat() {
         return lat;
@@ -62,7 +71,7 @@ public class Outlet {
                 "outletid='" + outletid + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", picture='" + picture + '\'' +
+                ", picture='" + picturename + '\'' +
                 ", lat=" + lat +
                 ", lon=" + lon +
                 ", upvotes=" + upvotes+

@@ -1,5 +1,7 @@
 package com.example.agneh.poweroutletapp;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,8 +28,9 @@ public class Functions {
             double lon = Double.parseDouble(jOutlet.getString("lon"));
             String title = jOutlet.getString("title");
             String description = jOutlet.getString("description");
-            Outlet outlet = new Outlet(outletid,title,lat,lon,description);
-
+            String picturename = jOutlet.getString("picture");
+            Log.d("picture",picturename);
+            Outlet outlet = new Outlet(outletid,title,lat,lon,description,picturename);
             // Getting comments
             JSONArray jComments = jOutlet.getJSONArray("comments");
 
