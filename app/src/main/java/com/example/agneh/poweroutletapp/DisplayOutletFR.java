@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +48,14 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
 
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) thisView.getParent()).getLayoutParams();
         CoordinatorLayout.Behavior behavior = params.getBehavior();
+        dialog.getWindow().setDimAmount(0);
         String outlet = getArguments().getString("outlet");
         getOutlet(outlet);
 
         if( behavior != null && behavior instanceof BottomSheetBehavior ) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
             ((BottomSheetBehavior) behavior).setPeekHeight(150);
+
         }
 
     }

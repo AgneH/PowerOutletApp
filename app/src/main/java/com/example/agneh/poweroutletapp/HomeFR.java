@@ -16,6 +16,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -26,13 +27,16 @@ import java.util.ArrayList;
  * Created by agneh on 2017-03-28.
  */
 
-public class HomeFR extends Fragment implements OnMapReadyCallback{
+public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     //Listener for opening add outlet map fragment
     private Home_AddOutletMap_Listener addOutletMapListener;
     private GoogleMap mMap;
     //required empty public constructor
     public HomeFR() {}
+
+
+
     //Listener interface for opening add outlet map fragment
     interface Home_AddOutletMap_Listener {
         void addOutletMapClicked();
@@ -52,9 +56,16 @@ public class HomeFR extends Fragment implements OnMapReadyCallback{
     public void onMapReady(GoogleMap googleMap) {
         //set map variable
         mMap = googleMap;
+        mMap.setOnMarkerClickListener(this);
         getAllOutlets();
     }
 
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        showOutletDialog((String)marker.getTag()); //tag inneholder outlet ID
+        return true;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,7 +80,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback{
         btnDisplayOutlet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showOutletDialog();
+                //showOutletDialog();
             }
         });
         //set Listener for Open new outlet map
@@ -93,10 +104,10 @@ public class HomeFR extends Fragment implements OnMapReadyCallback{
 
     //opens a dialog to display a specific outlet
     //TODO: implement choosing a specific dialog
-    private void showOutletDialog(){
+    private void showOutletDialog(String outletId){
         FragmentManager fm = getFragmentManager();
-        DisplayOutletFR outletDialog = DisplayOutletFR.newInstance("8");
-        outletDialog.show(fm, "fragment");
+        DisplayOutletFR outletDialog = DisplayOutletFR.newInstance(outletId);
+        outletDialog.show(fm, "Outlet Dialog");
     }
 
     // Here is a bunch of Torkel kode that i do not entirelly understand - comment please
@@ -146,13 +157,14 @@ public class HomeFR extends Fragment implements OnMapReadyCallback{
     public void uiGetAllOutlets(ArrayList<Outlet> outlets){
         for(Outlet outlet : outlets){
             Log.d("out",outlet.toString());
-            setMarker(outlet.getLat(), outlet.getLon(), outlet.getTitle());
+            setMarker(outlet.getLat(), outlet.getLon(), outlet.getTitle(), outlet.getOutletid());
         }
     }
 
-    public void setMarker(Double lat, Double lon, String tittel){
+    public void setMarker(Double lat, Double lon, String tittel, String id){
         LatLng ny = new LatLng(lat,lon);
-        mMap.addMarker(new MarkerOptions().position(ny).title(tittel));
+        Marker nyMarker= mMap.addMarker(new MarkerOptions().position(ny).title(tittel));
+        nyMarker.setTag(id);
     }
 
 

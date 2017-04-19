@@ -38,7 +38,10 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddOu
         //No other choices as for today. TO DO: remove switch if we do not come across other options
         switch(item.getItemId()){
             case R.id.Home:
-                Toast.makeText(this, "You clicked Home" , Toast.LENGTH_LONG).show();
+                fragment = new HomeFR();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.main_content,fragment);
+                ft.commit();
                 break;
         }
 
