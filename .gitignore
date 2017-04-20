@@ -3,6 +3,9 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/misc.xml
+/.idea/modules.xml
+/.idea/runConfigurations.xml
+/.idea/vcs.xml
 /.idea/libraries
 .DS_Store
 /build
