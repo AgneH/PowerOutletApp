@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -28,6 +30,9 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     //Map point chosen
     boolean mChosen = false;
     Marker m;
+    private double latitude = 60.153;
+    private double longitude = 10.261;
+
 
     //Required empty public constructor
     public AddOutletMapFR() {}
@@ -48,7 +53,12 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //Current location zooming
+        LatLng current = new LatLng(latitude, longitude);
 
+        //ToDO: current location marker has to be reconfigured
+        Marker myLocationMarker = mMap.addMarker(new MarkerOptions().position(current).title("Your location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16));
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
@@ -57,7 +67,7 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
 
                 MarkerOptions marker;
 
-                if(mChosen==false){
+                if(!mChosen){
                     marker = new MarkerOptions().position(
                             new LatLng(point.latitude, point.longitude)).title("New Marker");
                     m = mMap.addMarker(marker);
