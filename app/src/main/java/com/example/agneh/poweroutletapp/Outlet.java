@@ -12,6 +12,7 @@ public class Outlet {
     int pictureid;
     Double lat,lon;
     int upvotes;
+    int downvotes;
     ArrayList<Comment> comments = new ArrayList<>();
 
     public Outlet(String outletid,String title,double lat, double lon,String description,String picturename){
@@ -24,10 +25,11 @@ public class Outlet {
     }
 
     public void calculateUpvotes(){
-        upvotes=0;
+        this.upvotes=0;
+        this.downvotes=0;
         for(Comment comment : comments){
             if(comment.getUpvote()==1)upvotes++;
-            else upvotes--;
+            else downvotes++;
         }
     }
 
@@ -57,6 +59,10 @@ public class Outlet {
 
     public int getPictureid() { return pictureid; }
 
+    public int getUpvotes() { return upvotes; }
+
+    public int getDownvotes() { return downvotes; }
+
     public Double getLat() {
         return lat;
     }
@@ -75,6 +81,7 @@ public class Outlet {
                 ", lat=" + lat +
                 ", lon=" + lon +
                 ", upvotes=" + upvotes+
+                ", downvotes=" + downvotes+
                 '}';
     }
 }
