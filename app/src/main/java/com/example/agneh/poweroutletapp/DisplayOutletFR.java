@@ -9,10 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -122,8 +120,7 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
             Log.d("Response: ", "> " + jsonStr);
             try{
                 JSONObject jOutlet = new JSONObject(jsonStr);
-                Outlet outlet = Functions.parseOutlet(jOutlet);
-                return outlet;
+                return Functions.parseOutlet(jOutlet);
             }catch (Exception ex){
                 return null;
             }
@@ -138,7 +135,7 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView imgCamera;
 
-        public DownloadImageTask(ImageView bmImage) {
+        private DownloadImageTask(ImageView bmImage) {
             this.imgCamera = bmImage;
         }
 

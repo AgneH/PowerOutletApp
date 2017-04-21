@@ -30,8 +30,9 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     //Map point chosen
     boolean mChosen = false;
     Marker m;
-    private double latitude = 60.153;
-    private double longitude = 10.261;
+    private double latitude = 0.0;
+    private double longitude = 0.0;
+
 
 
     //Required empty public constructor
@@ -53,12 +54,7 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        //Current location zooming
-        LatLng current = new LatLng(latitude, longitude);
-
-        //ToDO: current location marker has to be reconfigured
-        Marker myLocationMarker = mMap.addMarker(new MarkerOptions().position(current).title("Your location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16));
+        zoomToLocation();
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
@@ -69,23 +65,15 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
 
                 if(!mChosen){
                     marker = new MarkerOptions().position(
-                            new LatLng(point.latitude, point.longitude)).title("New Marker");
+                            new LatLng(point.latitude, point.longitude)).title("Your power outlet");
                     m = mMap.addMarker(marker);
+                    m.showInfoWindow();
                     mChosen = true;
                 } else {
                     LatLng newLatlng = new LatLng(point.latitude,point.longitude);
                     m.setPosition(newLatlng);
+                    m.showInfoWindow();
                 }
-
-                // Context context = getApplicationContext();
-                String text = point.latitude+"   "+point.longitude;
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(getActivity(), text, duration);
-                toast.show();
-
-                Double lat = point.latitude;
-                Double lon = point.longitude;
             }
         });
 
@@ -124,6 +112,17 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     public void onAttach(Context context) {
         super.onAttach(context);
         this.addOutletListener = (Map_AddOutlet_Listener) context;
+    }
+
+
+    private void zoomToLocation(){
+        LatLng current = new LatLng(latitude, longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16));
+    }
+
+    public void setCoordinates(double latid, double longit){
+        latitude = latid;
+        longitude = longit;
     }
 
 }

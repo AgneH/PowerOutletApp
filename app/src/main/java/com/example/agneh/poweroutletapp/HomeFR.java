@@ -10,15 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import org.json.JSONArray;
 import java.util.ArrayList;
 
@@ -32,10 +30,11 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
     //Listener for opening add outlet map fragment
     private Home_AddOutletMap_Listener addOutletMapListener;
     private GoogleMap mMap;
+    private double latitude = 0.0;
+    private double longitude = 0.0;
+
     //required empty public constructor
     public HomeFR() {}
-
-
 
     //Listener interface for opening add outlet map fragment
     interface Home_AddOutletMap_Listener {
@@ -58,12 +57,19 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         mMap = googleMap;
         mMap.setOnMarkerClickListener(this);
         getAllOutlets();
+        zoomToLocation();
     }
 
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        showOutletDialog((String)marker.getTag()); //tag inneholder outlet ID
+
+            String tag = (String)marker.getTag();
+            if(tag!=null) {
+                showOutletDialog(tag); //tag inneholder outlet ID
+            } else {
+                marker.showInfoWindow();
+            }
         return true;
     }
 
@@ -75,14 +81,6 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //set Listener for display Outlet
-        Button btnDisplayOutlet = (Button) thisView.findViewById(R.id.btn_display_location);
-        btnDisplayOutlet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //showOutletDialog();
-            }
-        });
         //set Listener for Open new outlet map
         FloatingActionButton btnAddOutletMap = (FloatingActionButton) thisView.findViewById(R.id.abtn_add_outlet_map);
         btnAddOutletMap.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +89,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
                 addOutletMapListener.addOutletMapClicked();
             }
         });
+
 
         return thisView;
     }
@@ -166,6 +165,17 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         Marker nyMarker= mMap.addMarker(new MarkerOptions().position(ny).title(tittel));
         nyMarker.setTag(id);
     }
+
+    public void zoomToLocation(){
+        LatLng current = new LatLng(latitude, longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 14));
+    }
+
+    public void setCoordinates(double latid, double longit){
+        latitude = latid;
+        longitude = longit;
+    }
+
 
 
 }

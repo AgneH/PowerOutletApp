@@ -15,24 +15,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Check out location"
-            android:layout_gravity="bottom"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/btn_display_location"/>
-
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/abtn_add_outlet_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_above="@+id/btn_display_location"
+            android:layout_alignParentBottom="true"
             android:layout_margin="16dp"
             android:clickable="true"
             app:fabSize="normal"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            android:src="@drawable/ic_add_white_24dp"
+             />
     </RelativeLayout>
 
 

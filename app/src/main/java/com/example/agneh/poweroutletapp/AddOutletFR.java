@@ -63,8 +63,8 @@ public class AddOutletFR extends Fragment {
             public void onClick(View v) {
 
                 Log.d("btnUpload","clicked");
-                String title=txtTitle.getText().toString();
-                if(!(title.equals(null))&&!(title.trim().equals(""))) {
+                String title = txtTitle.getText().toString();
+                if(!title.trim().equals("")) {
                     Log.d("title=",title);
                     insertOutlet(lat, lon, txtTitle.getText().toString(), txtDescription.getText().toString(), encodeImage());
                 }else{
@@ -113,8 +113,8 @@ public class AddOutletFR extends Fragment {
             map.put("lat",lat);
             map.put("lon",lon);
             map.put("title",title);
-            if(description!=null && description!="") map.put("description",description);
-            if(picture!=null && picture!="") map.put("picture",picture);
+            if(description!=null && !description.equals("")) map.put("description",description);
+            if(picture!=null && !picture.equals("")) map.put("picture",picture);
             String result = webreq.makeWebServiceCall(url, WebRequest.POSTRequest,map);
             Log.d("Response: ", "> " + result);
             return Functions.tryParseInt(result) ? result : null;
@@ -154,8 +154,10 @@ public class AddOutletFR extends Fragment {
             bm.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
             byte[] bytes = byteArrayOutputStream.toByteArray();
             return Base64.encodeToString(bytes, Base64.DEFAULT);
-        }catch(Exception e){}
-        return null;
+        }catch(Exception e){
+            return null;
+        }
+
     }
 
     public Bitmap rotateImageToPortrait(Bitmap bitmap, float degrees){
