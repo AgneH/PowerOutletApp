@@ -202,12 +202,13 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddOu
     }
 
     @Override
-    public void addOutletClicked() {
+    public void addOutletClicked(double latitude, double longitude) {
         //Adds Add Outlet fragment to the main window
         fragment = new AddOutletFR();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_content,fragment);
+        ((AddOutletFR) fragment).setLocation(latitude, longitude);
         ft.addToBackStack(null);
         ft.commit();
     }

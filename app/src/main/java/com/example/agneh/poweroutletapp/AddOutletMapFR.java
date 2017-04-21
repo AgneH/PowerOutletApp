@@ -32,6 +32,8 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     Marker m;
     private double latitude = 0.0;
     private double longitude = 0.0;
+    private double latChosen = 0.0;
+    private double longChosen = 0.0;
 
 
 
@@ -39,7 +41,7 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     public AddOutletMapFR() {}
     //Listener interface for opening add outlet fragment
     interface Map_AddOutlet_Listener{
-        void addOutletClicked();
+        void addOutletClicked(double latitude, double longitude);
     }
     /**
      * Manipulates the map once available.
@@ -66,11 +68,15 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
                 if(!mChosen){
                     marker = new MarkerOptions().position(
                             new LatLng(point.latitude, point.longitude)).title("Your power outlet");
+                    latChosen=point.latitude;
+                    longChosen=point.longitude;
                     m = mMap.addMarker(marker);
                     m.showInfoWindow();
                     mChosen = true;
                 } else {
                     LatLng newLatlng = new LatLng(point.latitude,point.longitude);
+                    latChosen=point.latitude;
+                    longChosen=point.longitude;
                     m.setPosition(newLatlng);
                     m.showInfoWindow();
                 }
@@ -101,7 +107,7 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
         btnAddOutletLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addOutletListener.addOutletClicked();
+                addOutletListener.addOutletClicked(latChosen, longChosen);
             }
         });
 

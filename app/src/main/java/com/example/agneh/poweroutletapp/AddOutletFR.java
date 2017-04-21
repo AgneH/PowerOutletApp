@@ -13,9 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,13 +34,14 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class AddOutletFR extends Fragment {
-    TextView txtDescription;
-    TextView txtTitle;
+    TextView lblCoordinates;
+    EditText txtDescription;
+    EditText txtTitle;
     View thisView;
     Button btnCamera,btnUpload;
     ImageView imgCamera;
-    double lat = 30;
-    double lon = 30;
+    double lat = 0;
+    double lon = 0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public AddOutletFR() {
         //required empty public constructor
@@ -47,11 +51,13 @@ public class AddOutletFR extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the layout for this fragment
         thisView = inflater.inflate(R.layout.fragment_add_outlet, container, false);
+        lblCoordinates = (TextView) thisView.findViewById(R.id.lblCoordnates);
+        lblCoordinates.setText("("+Double.toString(lat)+","+Double.toString(lon)+")");
         btnCamera = (Button) thisView.findViewById(R.id.btnCamera);
         btnUpload = (Button) thisView.findViewById(R.id.btnUpload);
         imgCamera = (ImageView) thisView.findViewById(R.id.imgCamera);
-        txtDescription = (TextView) thisView.findViewById(R.id.txtDescription);
-        txtTitle = (TextView) thisView.findViewById(R.id.txtTitle);
+        txtDescription = (EditText) thisView.findViewById(R.id.txtDescription);
+        txtTitle = (EditText) thisView.findViewById(R.id.txtTitle);
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,6 +176,12 @@ public class AddOutletFR extends Fragment {
         Matrix matrix = new Matrix();
         matrix.postScale(-1, 1, bitmap.getWidth()/2, bitmap.getHeight()/2);
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+    }
+
+
+    public void setLocation(double latitude, double longitude){
+        lat=latitude;
+        lon=longitude;
     }
 
 }
