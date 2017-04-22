@@ -18,42 +18,73 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@color/colorPrimary"
-            android:id="@+id/lblCoordnates"/>
+            android:id="@+id/lblCoordnates"
+            android:textAlignment="center"/>
 
-        <EditText
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayoutLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Location name"
-            android:textSize="16sp"
-            android:id="@+id/txtTitle" />
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/colorPrimary">
 
-        <EditText
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/title_location_name"
+                android:textSize="16sp"
+                android:id="@+id/txtTitle"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayoutDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description"
-            android:layout_weight="80"
-            android:inputType="textMultiLine"
-            android:gravity="top"
-            android:textSize="16sp"
-            android:id="@+id/txtDescription" />
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="10dp"
+            android:textColorHint="@color/colorPrimary">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:hint="@string/title_description"
+                android:layout_weight="80"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:textSize="16sp"
+                android:id="@+id/txtDescription"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+
+        </android.support.design.widget.TextInputLayout>
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imgCamera" />
+            android:layout_height="190dp"
+            android:src="@drawable/camera"
+            android:id="@+id/imgCamera"
+            android:layout_marginBottom="10dp"/>
 
         <Button
-            android:text="Add picture"
+            android:text="@string/title_add_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnCamera" />
+            android:id="@+id/btnCamera"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorBlueGrey400"
+            android:textColor="@color/colorWhite"/>
 
         <Button
-            android:text="Save outlet"
+            android:text="@string/title_save_outlet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnUpload"/>
+            android:id="@+id/btnUpload"
+            android:background="@color/colorAccent"
+            android:textColor="@color/colorWhite"/>
 
     </LinearLayout>
 

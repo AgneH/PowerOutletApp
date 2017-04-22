@@ -9,4 +9,8 @@
         <item>Item 5</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+    <string name="title_save_outlet">Save outlet</string>
+    <string name="title_add_picture">Add picture</string>
+    <string name="title_description">Description</string>
+    <string name="title_location_name">Location name</string>
 </resources>
