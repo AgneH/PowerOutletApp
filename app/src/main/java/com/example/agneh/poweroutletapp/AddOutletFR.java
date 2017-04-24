@@ -2,11 +2,15 @@ package com.example.agneh.poweroutletapp;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,11 +25,15 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -43,6 +51,8 @@ public class AddOutletFR extends Fragment {
     double lat = 0;
     double lon = 0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_TAKE_PHOTO = 1;
+    private String mCurrentPhotoPath;
     public AddOutletFR() {
         //required empty public constructor
     }
@@ -61,7 +71,7 @@ public class AddOutletFR extends Fragment {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCameraIntent();
+                dispatchTakePictureIntent();
             }
         });
         btnUpload.setOnClickListener(new View.OnClickListener() {
@@ -134,22 +144,75 @@ public class AddOutletFR extends Fragment {
     }
 
 
-    private void openCameraIntent() {
-        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (pictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
-            startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-    }
+//    private void openCameraIntent() {
+//        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        if (pictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
+//            startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE);
+//        }
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            imageBitmap = rotateImageToPortrait(imageBitmap, 90);
-            imageBitmap = flipImageHorizontally(imageBitmap);
-            imgCamera.setImageBitmap(imageBitmap);
+            setPic();
         }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = AddOutletFR.this.getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName,".jpg",storageDir);
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(AddOutletFR.this.getContext().getPackageManager()) != null) {
+            // Creates a file for the image
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(AddOutletFR.this.getContext(),
+                        "com.example.android.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
+        }
+    }
+
+    private void setPic() {
+        // Get the dimensions of the View
+        int targetW = imgCamera.getWidth();
+        int targetH = imgCamera.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+//        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+//        bmOptions.inSampleSize = scaleFactor;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        if(photoW>photoH) {
+            bitmap = rotateImageToPortrait(bitmap, 90);
+        }
+        imgCamera.setImageBitmap(bitmap);
     }
 
     public String encodeImage(){
@@ -163,7 +226,6 @@ public class AddOutletFR extends Fragment {
         }catch(Exception e){
             return null;
         }
-
     }
 
     public Bitmap rotateImageToPortrait(Bitmap bitmap, float degrees){
