@@ -13,4 +13,6 @@
     <string name="title_add_picture">Add picture</string>
     <string name="title_description">Description</string>
     <string name="title_location_name">Location name</string>
+    <string name="img_chosen">Chosen image</string>
+    <string name="img_choose">Choose image</string>
 </resources>

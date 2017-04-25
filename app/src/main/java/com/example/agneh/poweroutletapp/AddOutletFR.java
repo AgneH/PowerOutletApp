@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +47,8 @@ public class AddOutletFR extends Fragment {
     EditText txtDescription;
     EditText txtTitle;
     View thisView;
-    Button btnCamera,btnUpload;
+    Button btnUpload;
+    ImageButton btnCamera;
     ImageView imgCamera;
     double lat = 0;
     double lon = 0;
@@ -63,7 +65,7 @@ public class AddOutletFR extends Fragment {
         thisView = inflater.inflate(R.layout.fragment_add_outlet, container, false);
         lblCoordinates = (TextView) thisView.findViewById(R.id.lblCoordnates);
         lblCoordinates.setText("("+Double.toString(lat)+","+Double.toString(lon)+")");
-        btnCamera = (Button) thisView.findViewById(R.id.btnCamera);
+        btnCamera = (ImageButton) thisView.findViewById(R.id.btnCamera);
         btnUpload = (Button) thisView.findViewById(R.id.btnUpload);
         imgCamera = (ImageView) thisView.findViewById(R.id.imgCamera);
         txtDescription = (EditText) thisView.findViewById(R.id.txtDescription);

@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:padding="16dp"
     android:background="#FFFFFF"
     tools:context="com.example.agneh.poweroutletapp.AddOutletFR">
@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <TextView
             android:layout_width="match_parent"
@@ -50,7 +51,7 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="80dp"
                 android:hint="@string/title_description"
                 android:layout_weight="80"
                 android:inputType="textMultiLine"
@@ -63,25 +64,33 @@
         </android.support.design.widget.TextInputLayout>
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:src="@drawable/camera"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="70"
+            android:src="@drawable/nopic"
             android:id="@+id/imgCamera"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/img_chosen"
+            android:background="@color/colorBlueGrey400"/>
 
-        <Button
+        <ImageButton
             android:text="@string/title_add_picture"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="16"
+            android:scaleType="fitCenter"
             android:id="@+id/btnCamera"
             android:layout_marginBottom="5dp"
             android:background="@color/colorBlueGrey400"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite"
+            android:src="@drawable/camera"
+            android:contentDescription="@string/img_choose" />
 
         <Button
             android:text="@string/title_save_outlet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="16"
             android:id="@+id/btnUpload"
             android:background="@color/colorAccent"
             android:textColor="@color/colorWhite"/>
