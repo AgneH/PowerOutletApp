@@ -7,21 +7,23 @@
     android:padding="10dp">
 
     <TextView
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtDate"
+        android:textSize="10sp"
         android:layout_alignParentTop="true"
+        android:text="date"
         android:layout_toEndOf="@+id/imgUpvote"
         android:layout_marginStart="18dp" />
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/txtComment"
         android:layout_width="208dp"
         android:layout_height="wrap_content"
-        android:id="@+id/txtComment"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/txtDate" />
+        android:layout_alignParentTop="true"
+        android:text="comment"
+        android:layout_alignStart="@+id/txtDate"
+        android:layout_marginTop="18dp"/>
 
     <ImageView
         android:layout_width="21dp"

@@ -94,14 +94,15 @@ public class AddOutletFR extends Fragment {
     }
 
 
-
+    //use this to insert an outlet into the db
+    //Refer to uiInsertOutlet if you want to use the result
     public void insertOutlet(double lat, double lon,String title, String description,String picture){
         Log.d("insertoutlet","started");
         new InsertOutlet().execute(Double.toString(lat),Double.toString(lon),title,description,picture);
         Log.d("insertoutlet","ended");
     }
 
-
+    //this runs after insertoutlet. Use this if you need the outletid for anything
     public void uiInsertOutlet(String outletid){
         Log.d("uiinsertoutlet","started");
         if(outletid!=null)

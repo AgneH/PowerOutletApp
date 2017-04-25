@@ -108,9 +108,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         DisplayOutletFR outletDialog = DisplayOutletFR.newInstance(outletId);
         outletDialog.show(fm, "Outlet Dialog");
     }
-
-    // Here is a bunch of Torkel kode that i do not entirelly understand - comment please
-
+    //start the asynctask that gets all outlets from the webservice and adds them to the map
     public void getAllOutlets(){
         new GetAllOutlets().execute();
     }
@@ -125,6 +123,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
             // Making a request to url and getting response
             String jsonStr = webreq.makeWebServiceCall(url, WebRequest.POSTRequest);
             Log.d("Response: ", "> " + jsonStr);
+            //Parse the result
             ArrayList<Outlet> outlets = parseOutlets(jsonStr);
             return outlets;
         }
@@ -135,6 +134,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         }
     }
 
+    //Parse a jsonarray of outlets
     public ArrayList<Outlet> parseOutlets(String json){
         if(json!=null){
             try{
@@ -154,6 +154,8 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
     }
 
     public void uiGetAllOutlets(ArrayList<Outlet> outlets){
+        //all ui-changes that depends on the outlets we get from the db goes here
+        //set markers for each outlet
         for(Outlet outlet : outlets){
             Log.d("out",outlet.toString());
             setMarker(outlet.getLat(), outlet.getLon(), outlet.getTitle(), outlet.getOutletid());

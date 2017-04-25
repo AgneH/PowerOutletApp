@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 public class Functions {
 
+    //Why is there no tryparse in java? Using it to check if the result from the webservice is valid
     public static boolean tryParseInt(String value) {
         try {
             Integer.parseInt(value);
@@ -21,6 +22,7 @@ public class Functions {
         }
     }
 
+    //parse an outlet from the webservice
     public static Outlet parseOutlet(JSONObject jOutlet) {
         try {
             String outletid = jOutlet.getString("outletid");

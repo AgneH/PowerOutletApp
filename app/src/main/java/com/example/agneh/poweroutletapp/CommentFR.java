@@ -25,11 +25,13 @@ public class CommentFR extends Fragment{
         return inflater.inflate(R.layout.fragment_comment, container, false);
     }
 
-
+    //use this to insert a comment to the db
+    //refer to uiInsertComment if you need the result
     public void insertComment(String outletid,String comment,int upvote){
         new InsertComment().execute(outletid,comment,Integer.toString(upvote));
     }
 
+    //runs after insertComment, use this if you need to do anything with the result
     public void uiInsertComment(String commentid){
         if(commentid!=null){
             Log.d("out",commentid);

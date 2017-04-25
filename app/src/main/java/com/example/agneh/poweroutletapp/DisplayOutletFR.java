@@ -76,12 +76,14 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
         }
     };
 
-
-    public void getOutlet(String s){
-        new GetOutlet().execute(s);
+    //start the asynctask to get an outlet
+    //Refer to uiGetOutlet if you need to use the result
+    public void getOutlet(String outletid){
+        new GetOutlet().execute(outletid);
     }
 
-
+    //Gets the result from getOutlet
+    //All UI changes that depends on the outlet we get from the db goes here
     public void uiGetOutlet(Outlet outlet){
         Log.d("out",outlet.toString());
         for(Comment comment : outlet.comments){
@@ -119,6 +121,7 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
             String jsonStr = webreq.makeWebServiceCall(url, WebRequest.POSTRequest,map);
             Log.d("Response: ", "> " + jsonStr);
             try{
+                //Parse the result
                 JSONObject jOutlet = new JSONObject(jsonStr);
                 return Functions.parseOutlet(jOutlet);
             }catch (Exception ex){
