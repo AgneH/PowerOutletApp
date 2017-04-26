@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,7 +26,7 @@ import java.util.HashMap;
  */
 
 public class DisplayOutletFR extends BottomSheetDialogFragment {
-
+    private final int PEEKHEIGHT = 280;
     private View thisView;
     public DisplayOutletFR() {
         //required empty public constructor
@@ -56,7 +57,7 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
 
         if( behavior != null && behavior instanceof BottomSheetBehavior ) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
-            ((BottomSheetBehavior) behavior).setPeekHeight(150);
+            ((BottomSheetBehavior) behavior).setPeekHeight(PEEKHEIGHT);
 
         }
 
@@ -100,6 +101,8 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
         txtUpvotes.setText(Integer.toString(outlet.getUpvotes()));
         txtDownvotes.setText(Integer.toString(outlet.getDownvotes()));
         txtDescription.setText(outlet.getDescription());
+        //add scroll to description
+        txtDescription.setMovementMethod(new ScrollingMovementMethod());
 
         String picture = "http://lekrot.no/poapi/upload/"+outlet.getPicturename();
         new DownloadImageTask((ImageView) thisView.findViewById(R.id.imaOutlet))

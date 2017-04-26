@@ -8,9 +8,11 @@
     android:weightSum="1">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6">
 
         <TextView
+            android:maxWidth="160dp"
             android:text="Title"
             android:textSize="24sp"
             android:layout_width="wrap_content"
@@ -54,38 +56,48 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxHeight="200dp"
+            android:maxHeight="180dp"
+            android:adjustViewBounds= "true"
             app:srcCompat="@color/colorAccent"
             android:id="@+id/imaOutlet"
             android:layout_below="@+id/txtTitle"
-            android:layout_marginTop="10dp"
-            />
-
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:maxLines = "3"
+            android:scrollbars = "vertical"
+            android:text="Desription. Bacon ipsum dolor amet bacon shoulder kevin cow brisket pork belly. Bresaola corned beef frankfurter ribeye pork meatloaf. Tri-tip tail beef ribs meatball, sirloin biltong cow andouille spare ribs hamburger corned beef ham brisket alcatra capicola."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imaOutlet"
+            android:layout_marginRight ="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/txtDescription"/>
     </RelativeLayout>
-    <TextView
-        android:maxLines = "3"
-        android:scrollbars = "vertical"
-        android:text="Desription. Bacon ipsum dolor amet bacon shoulder kevin cow brisket pork belly. Bresaola corned beef frankfurter ribeye pork meatloaf. Tri-tip tail beef ribs meatball, sirloin biltong cow andouille spare ribs hamburger corned beef ham brisket alcatra capicola."
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginRight ="10dp"
-        android:layout_marginTop="19dp"
-        android:id="@+id/txtDescription"/>
-    <Button
-        android:text="Write a comment"
+
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnWriteComment" />
+        android:minHeight="100dp"
+        android:id="@+id/comment_container"
+        android:layout_weight="0.4">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:entries="@array/testArray"
+            android:id="@+id/lstComments" />
+        <Button
+            android:id="@+id/btnWriteComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment"
+            android:minHeight="10dp"
+            android:drawableRight="@drawable/comments"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/lstComments"/>
+    </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/comment_container"></FrameLayout>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:entries="@array/testArray"
-        android:id="@+id/lstComments" />
 </LinearLayout>
 
