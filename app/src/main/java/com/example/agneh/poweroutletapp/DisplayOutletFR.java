@@ -9,12 +9,16 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.FragmentManager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.JSONObject;
 
 import java.io.InputStream;
@@ -25,18 +29,19 @@ import java.util.HashMap;
  * Created by agneh on 2017-03-28.
  */
 
-public class DisplayOutletFR extends BottomSheetDialogFragment {
+public class DisplayOutletFR extends BottomSheetDialogFragment{
     private final int PEEKHEIGHT = 280;
+    private String outletid;
     private View thisView;
     public DisplayOutletFR() {
         //required empty public constructor
     }
 
-    public static DisplayOutletFR newInstance(String title) {
+    public static DisplayOutletFR newInstance(String outletid) {
         DisplayOutletFR frag = new DisplayOutletFR();
         Bundle args = new Bundle();
         // this is a way to send data to Dialog window
-        args.putString("outlet", title);
+        args.putString("outlet", outletid);
         frag.setArguments(args);
         return frag;
     }
@@ -53,6 +58,7 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
         CoordinatorLayout.Behavior behavior = params.getBehavior();
         dialog.getWindow().setDimAmount(0);
         String outlet = getArguments().getString("outlet");
+        this.outletid = outlet;
         getOutlet(outlet);
 
         if( behavior != null && behavior instanceof BottomSheetBehavior ) {
@@ -61,6 +67,24 @@ public class DisplayOutletFR extends BottomSheetDialogFragment {
 
         }
 
+        Button btnWriteComment = (Button) thisView.findViewById(R.id.btnWriteComment);
+        btnWriteComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCommentDialog();
+            }
+        });
+
+    }
+
+    public void showCommentDialog(){
+        FragmentManager fm = getFragmentManager();
+        CommentDialog commentDialog = new CommentDialog();
+        Bundle args = new Bundle();
+        // this is a way to send data to Dialog window
+        args.putString("outletid", outletid);
+        commentDialog.setArguments(args);
+        commentDialog.show(fm, "commentdialog");
     }
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {

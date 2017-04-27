@@ -2,6 +2,7 @@ package com.example.agneh.poweroutletapp;
 
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -18,7 +20,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddOutletMap_Listener, AddOutletMapFR.Map_AddOutlet_Listener, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks,
+import java.util.HashMap;
+
+public class MainActivity extends AppCompatActivity implements CommentDialog.CommentDialogListener, HomeFR.Home_AddOutletMap_Listener, AddOutletMapFR.Map_AddOutlet_Listener, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
 
     Fragment fragment;
@@ -207,6 +211,52 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddOu
         ((AddOutletFR) fragment).setLocation(latitude, longitude);
         ft.addToBackStack(null);
         ft.commit();
+    }
+
+    @Override
+    public void OnFinishCommentDialog(String outletid, String comment, int upvote) {
+        insertComment(outletid,comment,upvote);
+    }
+
+    //use this to insert a comment to the db
+    //refer to uiInsertComment if you need the result
+    public void insertComment(String outletid,String comment,int upvote){
+        new InsertComment().execute(outletid,comment,Integer.toString(upvote));
+    }
+
+    //runs after insertComment, use this if you need to do anything with the result
+    public void uiInsertComment(String commentid){
+        if(commentid!=null){
+            Log.d("out",commentid);
+        }else{
+            Log.d("out","something went wrong");
+        }
+    }
+
+    private class InsertComment extends AsyncTask<String,String,String> {
+        @Override
+        protected String doInBackground(String...params) {
+            String outletid = params[0];
+            String comment = params[1];
+            String upvote = params[2];
+            String url = "http://lekrot.no/poapi/insertcomment.php";
+            // Creating service handler class instance
+            WebRequest webreq = new WebRequest();
+
+            // Making a request to url and getting response
+            HashMap<String,String> map = new HashMap<>();
+            map.put("outletid",outletid);
+            map.put("comment",comment);
+            map.put("upvote",upvote);
+            String result = webreq.makeWebServiceCall(url, WebRequest.POSTRequest,map);
+            Log.d("Response: ", "> " + result);
+            return Functions.tryParseInt(result) ? result : null;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            uiInsertComment(result);
+        }
     }
 }
 
