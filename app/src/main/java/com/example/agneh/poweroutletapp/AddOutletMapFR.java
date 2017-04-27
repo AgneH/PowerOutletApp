@@ -3,6 +3,7 @@ package com.example.agneh.poweroutletapp;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -98,8 +100,10 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
         //inflate the layout for this fragment
         View thisView = inflater.inflate(R.layout.fragment_add_outlet_map, container, false);
         //add map fragment
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = new SupportMapFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(R.id.addoutletmap, mapFragment);
+        transaction.commit();
         mapFragment.getMapAsync(this);
         //set listener for add outlet location
         Button btnAddOutletLocation = (Button) thisView.findViewById(R.id.btn_add_location);
@@ -126,9 +130,10 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16));
     }
 
-    public void setCoordinates(double latid, double longit){
+    public void setCoordinates(double latid, double longit) {
         latitude = latid;
         longitude = longit;
     }
+
 
 }

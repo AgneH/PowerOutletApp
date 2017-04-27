@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -78,8 +80,10 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         //inflate the layout for this fragment
         View thisView = inflater.inflate(R.layout.fragment_home, container, false);
         //add map fragment
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = new SupportMapFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(R.id.homemap, mapFragment);
+        transaction.commit();
         mapFragment.getMapAsync(this);
         //set Listener for Open new outlet map
         FloatingActionButton btnAddOutletMap = (FloatingActionButton) thisView.findViewById(R.id.abtn_add_outlet_map);
@@ -177,6 +181,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         latitude = latid;
         longitude = longit;
     }
+
 
 
 

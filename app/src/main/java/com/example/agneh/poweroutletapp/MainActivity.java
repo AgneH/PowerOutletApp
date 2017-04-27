@@ -1,9 +1,7 @@
 package com.example.agneh.poweroutletapp;
 
-import android.*;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -19,8 +17,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-
-import java.text.DateFormat;
 
 public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddOutletMap_Listener, AddOutletMapFR.Map_AddOutlet_Listener, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
@@ -212,6 +208,5 @@ public class MainActivity extends AppCompatActivity implements HomeFR.Home_AddOu
         ft.addToBackStack(null);
         ft.commit();
     }
-
 }
 
