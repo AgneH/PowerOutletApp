@@ -3,6 +3,7 @@ package com.example.agneh.poweroutletapp;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -146,14 +147,6 @@ public class AddOutletFR extends Fragment {
         }
     }
 
-
-//    private void openCameraIntent() {
-//        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (pictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
-//            startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE);
-//        }
-//    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -164,9 +157,9 @@ public class AddOutletFR extends Fragment {
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String imageFileName = "PNG_" + timeStamp + "_";
         File storageDir = AddOutletFR.this.getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(imageFileName,".jpg",storageDir);
+        File image = File.createTempFile(imageFileName,".png",storageDir);
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
@@ -194,8 +187,8 @@ public class AddOutletFR extends Fragment {
 
     private void setPic() {
         // Get the dimensions of the View
-        int targetW = imgCamera.getWidth();
-        int targetH = imgCamera.getHeight();
+//        int targetW = imgCamera.getWidth();
+//        int targetH = imgCamera.getHeight();
 
         // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
@@ -215,7 +208,9 @@ public class AddOutletFR extends Fragment {
         if(photoW>photoH) {
             bitmap = rotateImageToPortrait(bitmap, 90);
         }
+        imgCamera.setBackgroundColor(Color.TRANSPARENT);
         imgCamera.setImageBitmap(bitmap);
+        imgCamera.setScaleType(ImageView.ScaleType.FIT_START);
     }
 
     public String encodeImage(){
@@ -223,7 +218,7 @@ public class AddOutletFR extends Fragment {
             imgCamera.buildDrawingCache();
             Bitmap bm = imgCamera.getDrawingCache();
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            bm.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] bytes = byteArrayOutputStream.toByteArray();
             return Base64.encodeToString(bytes, Base64.DEFAULT);
         }catch(Exception e){
