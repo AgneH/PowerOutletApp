@@ -69,7 +69,7 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
 
                 if(!mChosen){
                     marker = new MarkerOptions().position(
-                            new LatLng(point.latitude, point.longitude)).title("Your power outlet");
+                            new LatLng(point.latitude, point.longitude)).title("Your power outlet").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
                     latChosen=point.latitude;
                     longChosen=point.longitude;
                     m = mMap.addMarker(marker);

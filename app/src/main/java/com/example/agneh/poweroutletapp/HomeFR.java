@@ -16,6 +16,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -168,7 +169,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
 
     public void setMarker(Double lat, Double lon, String tittel, String id){
         LatLng ny = new LatLng(lat,lon);
-        Marker nyMarker= mMap.addMarker(new MarkerOptions().position(ny).title(tittel));
+        Marker nyMarker= mMap.addMarker(new MarkerOptions().position(ny).title(tittel).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         nyMarker.setTag(id);
     }
 
