@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -107,7 +106,6 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
     }
 
     //opens a dialog to display a specific outlet
-    //TODO: implement choosing a specific dialog
     private void showOutletDialog(String outletId){
         FragmentManager fm = getFragmentManager();
         DisplayOutletFR outletDialog = DisplayOutletFR.newInstance(outletId);

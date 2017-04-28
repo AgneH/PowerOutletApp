@@ -30,6 +30,7 @@
             android:textColorHint="@color/colorPrimary">
 
             <EditText
+                android:maxLength="20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
@@ -70,8 +71,7 @@
             android:src="@drawable/nopic"
             android:id="@+id/imgCamera"
             android:layout_marginBottom="10dp"
-            android:contentDescription="@string/img_chosen"
-            android:background="@color/colorBlueGrey400"/>
+            android:contentDescription="@string/img_chosen"/>
 
         <ImageButton
             android:text="@string/title_add_picture"

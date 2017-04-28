@@ -30,7 +30,7 @@ import java.util.HashMap;
  */
 
 public class DisplayOutletFR extends BottomSheetDialogFragment{
-    private final int PEEKHEIGHT = 280;
+    private final int PEEKHEIGHT = 160;
     public String outletid;
     private View thisView;
     public DisplayOutletFR() {

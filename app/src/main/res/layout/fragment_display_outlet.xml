@@ -12,25 +12,15 @@
         android:layout_weight="0.6">
 
         <TextView
-            android:maxWidth="160dp"
-            android:text="Title"
-            android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="20sp"
+
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:id="@+id/txtTitle"
             android:textStyle="bold"/>
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="25dp"
-            app:srcCompat="@drawable/downvote"
-            android:id="@+id/imageView2"
-            android:layout_marginRight="3dp"
-            android:layout_toLeftOf="@+id/txtDownvotes"
-            android:contentDescription="@string/comment_downvote"/>
-
         <ImageView
             android:layout_width="15dp"
             android:layout_height="25dp"
@@ -39,45 +29,47 @@
             android:layout_marginRight="3dp"
             android:layout_toLeftOf="@+id/txtUpvotes"
             android:contentDescription="@string/comment_upvote"/>
-
         <TextView
-            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtUpvotes"
+            android:layout_alignBottom="@+id/txtTitle"
+            android:layout_toStartOf="@+id/imageView2"
+            android:layout_alignParentTop="true"
+            />
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="25dp"
+            app:srcCompat="@drawable/downvote"
+            android:id="@+id/imageView2"
+            android:layout_marginRight="3dp"
+            android:layout_toLeftOf="@+id/txtDownvotes"
+            android:contentDescription="@string/comment_downvote"/>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtDownvotes"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"/>
 
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtUpvotes"
-            android:layout_toLeftOf="@+id/imageView2"
-            android:layout_marginRight="8dp"/>
+
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="145dp"
             android:layout_height="145dp"
-            android:layout_weight="50"
-            android:minHeight="135dp"
-            android:maxHeight="180dp"
-            android:adjustViewBounds= "true"
-            app:srcCompat="@color/colorAccent"
+            android:scaleType="centerInside"
             android:id="@+id/imaOutlet"
             android:layout_below="@+id/txtTitle"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:contentDescription="@string/image_outlet"/>
+
         <TextView
-            android:maxLines = "3"
-            android:scrollbars = "vertical"
-            android:text="Desription. Bacon ipsum dolor amet bacon shoulder kevin cow brisket pork belly. Bresaola corned beef frankfurter ribeye pork meatloaf. Tri-tip tail beef ribs meatball, sirloin biltong cow andouille spare ribs hamburger corned beef ham brisket alcatra capicola."
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imaOutlet"
-            android:layout_marginRight ="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="145dp"
+            android:scrollbars = "vertical"
+            android:layout_toRightOf="@+id/imaOutlet"
+            android:layout_alignTop="@id/imaOutlet"
+            android:layout_marginLeft="10dp"
             android:id="@+id/txtDescription"/>
     </RelativeLayout>
 
@@ -95,18 +87,15 @@
             android:layout_weight="100"
             android:entries="@array/testArray"
             android:id="@+id/lstComments" />
-        <Button
-            android:id="@+id/btnWriteComment"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="40"
-            android:layout_marginTop="10dp"
-            android:text="@string/button_comment"
-            android:minHeight="10dp"
-            android:drawableRight="@drawable/comments"
-            android:layout_centerInParent="true"
-            android:layout_below="@id/lstComments"/>
-    </RelativeLayout>
 
+    </RelativeLayout>
+    <Button
+        android:id="@+id/btnWriteComment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/button_comment"
+        android:minHeight="10dp"
+        android:drawableRight="@drawable/comments" />
 </LinearLayout>
 

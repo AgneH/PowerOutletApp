@@ -97,6 +97,7 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         //inflate the layout for this fragment
         View thisView = inflater.inflate(R.layout.fragment_add_outlet_map, container, false);
         //add map fragment
