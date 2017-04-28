@@ -198,6 +198,7 @@ public class AddOutletFR extends Fragment {
         // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
+
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         int photoW = bmOptions.outWidth;
         int photoH = bmOptions.outHeight;
@@ -208,7 +209,7 @@ public class AddOutletFR extends Fragment {
         // Decode the image file into a Bitmap sized to fill the View
         bmOptions.inJustDecodeBounds = false;
 //        bmOptions.inSampleSize = scaleFactor;
-
+        bmOptions.inSampleSize=3;
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         if(photoW>photoH) {
             bitmap = rotateImageToPortrait(bitmap, 90);
