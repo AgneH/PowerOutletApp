@@ -107,10 +107,13 @@ public class AddOutletFR extends Fragment {
     public void uiInsertOutlet(String outletid){
         Log.d("uiinsertoutlet","started");
         if(outletid!=null)
-            Log.d("out",outletid);
-        else Log.d("out","something went wrong");
+            Toast.makeText(getContext(),"Outlet added",Toast.LENGTH_LONG).show();
+        else Toast.makeText(getContext(),"Something went wrong. Could not add outlet.",Toast.LENGTH_LONG).show();
         //TODO:Write code to set UI elements
 
+        //Pop backstack twice to go back to the homefragment
+        getFragmentManager().popBackStack();
+        getFragmentManager().popBackStackImmediate();
     }
 
 

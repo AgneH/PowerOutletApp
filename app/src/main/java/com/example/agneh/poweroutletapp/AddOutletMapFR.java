@@ -111,7 +111,11 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
         btnAddOutletLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addOutletListener.addOutletClicked(latChosen, longChosen);
+                if(latChosen != 0 && longChosen!=0) {
+                    addOutletListener.addOutletClicked(latChosen, longChosen);
+                }else{
+                    Toast.makeText(getContext(),"Choose a location by clicking on the map",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

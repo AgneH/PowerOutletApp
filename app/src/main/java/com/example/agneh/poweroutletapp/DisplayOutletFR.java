@@ -31,7 +31,7 @@ import java.util.HashMap;
 
 public class DisplayOutletFR extends BottomSheetDialogFragment{
     private final int PEEKHEIGHT = 280;
-    private String outletid;
+    public String outletid;
     private View thisView;
     public DisplayOutletFR() {
         //required empty public constructor

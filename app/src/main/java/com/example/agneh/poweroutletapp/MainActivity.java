@@ -228,7 +228,12 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
     public void uiInsertComment(String commentid){
         if(commentid!=null){
             Log.d("out",commentid);
+            Toast.makeText(getBaseContext(),"Comment added",Toast.LENGTH_SHORT).show();
+            //Update ui of the fragment
+            DisplayOutletFR frag =(DisplayOutletFR) getSupportFragmentManager().findFragmentByTag("Outlet Dialog");
+            frag.getOutlet(frag.outletid);
         }else{
+            Toast.makeText(getBaseContext(),"Something went wrong. Could not add comment.",Toast.LENGTH_SHORT).show();
             Log.d("out","something went wrong");
         }
     }
