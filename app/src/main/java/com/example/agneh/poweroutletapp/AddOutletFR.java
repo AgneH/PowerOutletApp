@@ -51,6 +51,7 @@ public class AddOutletFR extends Fragment {
     Button btnUpload;
     ImageButton btnCamera;
     ImageView imgCamera;
+    public boolean imagechanged = false;
     double lat = 0;
     double lon = 0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -85,7 +86,8 @@ public class AddOutletFR extends Fragment {
                 String title = txtTitle.getText().toString();
                 if(!title.trim().equals("")) {
                     Log.d("title=",title);
-                    insertOutlet(lat, lon, txtTitle.getText().toString(), txtDescription.getText().toString(), encodeImage());
+                    String pic = imagechanged?encodeImage():"";
+                    insertOutlet(lat, lon, txtTitle.getText().toString(), txtDescription.getText().toString(), pic);
                 }else{
                     Toast.makeText(getContext().getApplicationContext(), "Please insert a title", Toast.LENGTH_SHORT).show();
                 }
@@ -214,6 +216,7 @@ public class AddOutletFR extends Fragment {
         imgCamera.setBackgroundColor(Color.TRANSPARENT);
         imgCamera.setImageBitmap(bitmap);
         imgCamera.setScaleType(ImageView.ScaleType.FIT_START);
+        imagechanged=true;
     }
 
     public String encodeImage(){
