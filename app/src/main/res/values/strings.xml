@@ -15,4 +15,9 @@
     <string name="title_location_name">Location name</string>
     <string name="img_chosen">Chosen image</string>
     <string name="img_choose">Choose image</string>
+    <string name="title_comment">Leave a comment:</string>
+    <string name="comment_upvote">Upvote</string>
+    <string name="comment_downvote">Downvote</string>
+    <string name="image_outlet">Image outlet</string>
+    <string name="button_comment">Comment</string>
 </resources>

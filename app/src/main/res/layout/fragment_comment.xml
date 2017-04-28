@@ -5,43 +5,49 @@
     android:layout_gravity="center" android:orientation="vertical"
     android:padding="25dp">
 
-
     <TextView
         android:id="@+id/lblTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Leave a comment:"
+        android:text="@string/title_comment"
         android:layout_marginBottom="10dp"
         android:textColor="@color/colorPrimary" />
+
 <RadioGroup
     android:id="@+id/rdbGroup"
     android:layout_below="@+id/lblTitle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
     <RadioButton
         android:id="@+id/rdbUpvote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        />
+        android:checked="true" />
+
     <RadioButton
         android:id="@+id/rdbDownvote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
 </RadioGroup>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:src="@drawable/upvote"
         android:layout_alignLeft="@+id/rdbGroup"
-        android:layout_below="@+id/lblTitle"/>
+        android:layout_below="@+id/lblTitle"
+        android:contentDescription="@string/comment_upvote"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:src="@drawable/downvote"
         android:layout_above="@+id/txtComment"
         android:layout_alignParentStart="true"
-        />
+        android:contentDescription="@string/comment_downvote"/>
+
     <EditText
         android:layout_width="wrap_content"
         android:minWidth="100dp"
@@ -50,6 +56,5 @@
         android:inputType="text"
         android:imeOptions="actionDone"
         android:layout_below="@id/rdbGroup"/>
-
 
 </RelativeLayout>

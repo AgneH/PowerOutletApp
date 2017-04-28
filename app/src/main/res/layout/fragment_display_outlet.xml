@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/txtTitle" />
+            android:id="@+id/txtTitle"
+            android:textStyle="bold"/>
 
         <ImageView
             android:layout_width="15dp"
@@ -27,7 +28,8 @@
             app:srcCompat="@drawable/downvote"
             android:id="@+id/imageView2"
             android:layout_marginRight="3dp"
-            android:layout_toLeftOf="@+id/txtDownvotes"/>
+            android:layout_toLeftOf="@+id/txtDownvotes"
+            android:contentDescription="@string/comment_downvote"/>
 
         <ImageView
             android:layout_width="15dp"
@@ -35,7 +37,8 @@
             app:srcCompat="@drawable/upvote"
             android:id="@+id/imageView3"
             android:layout_marginRight="3dp"
-            android:layout_toLeftOf="@+id/txtUpvotes"/>
+            android:layout_toLeftOf="@+id/txtUpvotes"
+            android:contentDescription="@string/comment_upvote"/>
 
         <TextView
             android:text="TextView"
@@ -54,14 +57,20 @@
             android:layout_marginRight="8dp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="145dp"
+            android:layout_weight="50"
+            android:minHeight="135dp"
             android:maxHeight="180dp"
             android:adjustViewBounds= "true"
             app:srcCompat="@color/colorAccent"
             android:id="@+id/imaOutlet"
             android:layout_below="@+id/txtTitle"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/image_outlet"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:textAlignment="center"/>
         <TextView
             android:maxLines = "3"
             android:scrollbars = "vertical"
@@ -85,17 +94,20 @@
         android:layout_weight="0.4">
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="170dp"
+            android:layout_weight="100"
             android:entries="@array/testArray"
             android:id="@+id/lstComments" />
         <Button
             android:id="@+id/btnWriteComment"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Comment"
+            android:layout_height="60dp"
+            android:layout_weight="40"
+            android:layout_marginTop="10dp"
+            android:text="@string/button_comment"
             android:minHeight="10dp"
             android:drawableRight="@drawable/comments"
-            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
             android:layout_below="@id/lstComments"/>
     </RelativeLayout>
 
