@@ -3,11 +3,11 @@
     android:id="@+id/comment_layout"
     android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:layout_gravity="center" android:orientation="vertical"
-    android:padding="25dp">
+    android:padding="45dp">
 
     <TextView
         android:id="@+id/lblTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_comment"
         android:layout_marginBottom="10dp"
@@ -49,12 +49,13 @@
         android:contentDescription="@string/comment_downvote"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:minWidth="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/txtComment"
-        android:inputType="text"
         android:imeOptions="actionDone"
-        android:layout_below="@id/rdbGroup"/>
+        android:layout_below="@id/rdbGroup"
+        android:inputType="text"
+        />
 
 </RelativeLayout>
