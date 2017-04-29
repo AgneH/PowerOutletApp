@@ -1,5 +1,7 @@
 package com.example.agneh.poweroutletapp;
 
+import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
     LocationRequest mLocationRequest;
     double latitude = 0.0;
     double longitude = 0.0;
+    int rotation;
 
 
 
@@ -205,11 +209,17 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
     public void addOutletClicked(double latitude, double longitude) {
         //Adds Add Outlet fragment to the main window
         fragment = new AddOutletFR();
+        Bundle bundle = new Bundle();
+
+        rotation = ((WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+        bundle.putInt("orientation", rotation);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_content,fragment);
         ((AddOutletFR) fragment).setLocation(latitude, longitude);
         ft.addToBackStack(null);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        fragment.setArguments(bundle);
         ft.commit();
     }
 

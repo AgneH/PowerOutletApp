@@ -1,22 +1,28 @@
 package com.example.agneh.poweroutletapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -37,6 +43,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import static android.R.attr.path;
 import static android.app.Activity.RESULT_OK;
 
 /**
@@ -57,6 +64,7 @@ public class AddOutletFR extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
     private String mCurrentPhotoPath;
+    int rotation;
     public AddOutletFR() {
         //required empty public constructor
     }
@@ -65,6 +73,7 @@ public class AddOutletFR extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the layout for this fragment
         thisView = inflater.inflate(R.layout.fragment_add_outlet, container, false);
+        changeOrientation();
         lblCoordinates = (TextView) thisView.findViewById(R.id.lblCoordnates);
         lblCoordinates.setText("("+Double.toString(lat)+","+Double.toString(lon)+")");
         btnCamera = (ImageButton) thisView.findViewById(R.id.btnCamera);
@@ -155,6 +164,15 @@ public class AddOutletFR extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            if(((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation() == Surface.ROTATION_0){
+                rotation = 0;
+            } else if(((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation() == Surface.ROTATION_180){
+                rotation = 1;
+            } else if(((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation() == Surface.ROTATION_270){
+                rotation = 2;
+            } else{
+                rotation = 3;
+            }
             setPic();
         }
     }
@@ -191,28 +209,21 @@ public class AddOutletFR extends Fragment {
     }
 
     private void setPic() {
-        // Get the dimensions of the View
-//        int targetW = imgCamera.getWidth();
-//        int targetH = imgCamera.getHeight();
-
-        // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
 
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
 
-        // Determine how much to scale down the image
-//        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
+//         Decode the image file into a Bitmap sized to fill the View
         bmOptions.inJustDecodeBounds = false;
-//        bmOptions.inSampleSize = scaleFactor;
         bmOptions.inSampleSize=3;
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        if(photoW>photoH) {
+        if(rotation == 0) {
             bitmap = rotateImageToPortrait(bitmap, 90);
+        } else if(rotation == 1) {
+            bitmap = rotateImageToPortrait(bitmap, 270);
+        } else if(rotation == 2) {
+            bitmap = rotateImageToPortrait(bitmap, 180);
         }
         imgCamera.setBackgroundColor(Color.TRANSPARENT);
         imgCamera.setImageBitmap(bitmap);
@@ -249,6 +260,29 @@ public class AddOutletFR extends Fragment {
     public void setLocation(double latitude, double longitude){
         lat=latitude;
         lon=longitude;
+    }
+
+    public void changeOrientation(){
+        if(getArguments() != null){
+            switch (getArguments().getInt("orientation", 0)){
+                case Surface.ROTATION_0:
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    break;
+                case Surface.ROTATION_90:
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    break;
+                case Surface.ROTATION_180:
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                    break;
+                case Surface.ROTATION_270:
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                    break;
+                default:
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    break;
+            }
+        }
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
 }
