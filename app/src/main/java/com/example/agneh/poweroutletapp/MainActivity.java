@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
     double latitude = 0.0;
     double longitude = 0.0;
     int rotation;
-    Menu mMenu;
+
 
 
 
@@ -110,9 +110,6 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
                 }
             }
         }
-
-
-
     }
 
 

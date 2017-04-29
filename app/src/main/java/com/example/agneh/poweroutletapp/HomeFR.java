@@ -98,8 +98,6 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
             }
         });
 
-
-
         getActivity().invalidateOptionsMenu();
         return thisView;
     }

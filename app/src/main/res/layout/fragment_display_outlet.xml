@@ -96,6 +96,8 @@
         android:layout_marginTop="10dp"
         android:text="@string/button_comment"
         android:minHeight="10dp"
-        android:drawableRight="@drawable/comments" />
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:drawableRight="@drawable/comments"/>
 </LinearLayout>
 
