@@ -16,6 +16,8 @@
         android:layout_height="wrap_content"
         android:text="Add this location"
         android:id="@+id/btn_add_location"
-        android:layout_gravity="bottom"/>
+        android:layout_gravity="bottom"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"/>
 
 </FrameLayout>
