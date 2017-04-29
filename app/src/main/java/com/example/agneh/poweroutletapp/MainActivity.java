@@ -212,12 +212,13 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
     }
 
     //  @Override
-    public void addOutletMapClicked() {
+    public void addOutletMapClicked(float zoomlevel) {
         //Adds Add Outlet Map fragment to the main window
         fragment = new AddOutletMapFR();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_content,fragment);
+        ((AddOutletMapFR) fragment).setZoomLevel(zoomlevel);
         ((AddOutletMapFR) fragment).setCoordinates(latitude, longitude);
         ft.addToBackStack(null);
         ft.commit();

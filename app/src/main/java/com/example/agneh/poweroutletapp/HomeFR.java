@@ -35,12 +35,13 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
     private double latitude = 0.0;
     private double longitude = 0.0;
 
+
     //required empty public constructor
     public HomeFR() {}
 
     //Listener interface for opening add outlet map fragment
     interface Home_AddOutletMap_Listener {
-        void addOutletMapClicked();
+        void addOutletMapClicked(float zoomLevel);
     }
 
     /**
@@ -92,7 +93,8 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         btnAddOutletMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addOutletMapListener.addOutletMapClicked();
+                float zoomLevel = mMap.getCameraPosition().zoom;
+                addOutletMapListener.addOutletMapClicked(zoomLevel);
             }
         });
 

@@ -38,6 +38,8 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     private double longitude = 0.0;
     private double latChosen = 0.0;
     private double longChosen = 0.0;
+    private float defaultZoom = 14;
+    private float zoomLevel = 0;
 
 
 
@@ -60,7 +62,7 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        zoomToLocation();
+        zoomToLocation(zoomLevel);
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
@@ -124,10 +126,19 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
         this.addOutletListener = (Map_AddOutlet_Listener) context;
     }
 
+    //brukes til zooming til bestemt level
+    public void zoomToLocation(float zoomLevel){
+        LatLng current = new LatLng(latitude, longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, zoomLevel));
+    }
 
     public void zoomToLocation(){
         LatLng current = new LatLng(latitude, longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, defaultZoom));
+    }
+
+    public void setZoomLevel(float zoomLevel) {
+        this.zoomLevel = zoomLevel;
     }
 
     public void setCoordinates(double latid, double longit) {
@@ -136,4 +147,9 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     }
 
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        zoomLevel=mMap.getCameraPosition().zoom;
+    }
 }
