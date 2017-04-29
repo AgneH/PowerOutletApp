@@ -2,6 +2,7 @@ package com.example.agneh.poweroutletapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -119,9 +120,10 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
                 }
             }
         });
-
+        getActivity().invalidateOptionsMenu();
         return thisView;
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -130,7 +132,7 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
     }
 
 
-    private void zoomToLocation(){
+    public void zoomToLocation(){
         LatLng current = new LatLng(latitude, longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16));
     }

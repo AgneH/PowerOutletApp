@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
     double latitude = 0.0;
     double longitude = 0.0;
     int rotation;
+    Menu mMenu;
 
 
 
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
 
         //adds home fragment when activity is created
         fragment = new HomeFR();
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_content,fragment);
         ft.commit();
@@ -172,6 +172,12 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
     public boolean onCreateOptionsMenu(Menu menu) {
         //Populates Menu
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        //Enable Button Visibility
+
+        Fragment f = this.getSupportFragmentManager().findFragmentById(R.id.main_content);
+        menu.findItem(R.id.Home).setVisible(!(f instanceof HomeFR));
+        menu.findItem(R.id.Zoom).setVisible((f instanceof HomeFR)||(f instanceof AddOutletMapFR));
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -186,6 +192,19 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
                 ft.replace(R.id.main_content,fragment);
                 ((HomeFR) fragment).setCoordinates(latitude, longitude);
                 ft.commit();
+                break;
+
+            case R.id.Zoom:
+                Fragment f = this.getSupportFragmentManager().findFragmentById(R.id.main_content);
+                if (f instanceof HomeFR) {
+                    ((HomeFR) f).setCoordinates(latitude, longitude);
+                    ((HomeFR) f).zoomToLocation();
+                }
+                if (f instanceof AddOutletMapFR) {
+                    ((AddOutletMapFR) f).setCoordinates(latitude, longitude);
+                    ((AddOutletMapFR) f).zoomToLocation();
+                }
+
                 break;
         }
 
@@ -217,11 +236,13 @@ public class MainActivity extends AppCompatActivity implements CommentDialog.Com
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_content,fragment);
         ((AddOutletFR) fragment).setLocation(latitude, longitude);
-        ft.addToBackStack(null);
+       // ft.addToBackStack(null);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         fragment.setArguments(bundle);
+        ft.addToBackStack(null);
         ft.commit();
     }
+
 
     @Override
     public void OnFinishCommentDialog(String outletid, String comment, int upvote) {

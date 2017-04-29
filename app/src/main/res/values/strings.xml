@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Power Outlet</string>
+    <string name="app_name">Plug In</string>
     <string name="menu_home_title">Home</string>
+    <string name="menu_my_location_title">My Location</string>
     <string-array name="testArray">
         <item>Item 1</item>
         <item>Item 2</item>

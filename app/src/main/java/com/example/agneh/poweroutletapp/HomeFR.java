@@ -94,7 +94,7 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
             }
         });
 
-
+        getActivity().invalidateOptionsMenu();
         return thisView;
     }
 
@@ -104,6 +104,8 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         super.onAttach(context);
         this.addOutletMapListener = (Home_AddOutletMap_Listener)context;
     }
+
+
 
     //opens a dialog to display a specific outlet
     private void showOutletDialog(String outletId){
