@@ -7,10 +7,10 @@
     tools:context="com.example.agneh.poweroutletapp.MainActivity">
 
     <FrameLayout
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ff9900"
-        android:id="@+id/main_content">
+        android:background="@color/colorWhite">
 
     </FrameLayout>
 
