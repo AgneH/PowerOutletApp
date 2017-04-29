@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,6 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
             public void onMapClick(LatLng point) {
 
                 MarkerOptions marker;
-
                 if(!mChosen){
                     marker = new MarkerOptions().position(
                             new LatLng(point.latitude, point.longitude)).title("Your power outlet").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
@@ -83,14 +83,6 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
                     m.setPosition(newLatlng);
                     m.showInfoWindow();
                 }
-            }
-        });
-
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                marker.showInfoWindow();
-                return true;
             }
         });
     }
@@ -115,6 +107,7 @@ public class AddOutletMapFR extends Fragment implements OnMapReadyCallback{
             public void onClick(View v) {
                 if(latChosen != 0 && longChosen!=0) {
                     addOutletListener.addOutletClicked(latChosen, longChosen);
+                    mChosen=false;
                 }else{
                     Toast.makeText(getContext(),"Choose a location by clicking on the map",Toast.LENGTH_SHORT).show();
                 }

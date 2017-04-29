@@ -59,7 +59,9 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         mMap = googleMap;
         mMap.setOnMarkerClickListener(this);
         getAllOutlets();
-        zoomToLocation();
+        if ((longitude!=0.0)&&(latitude!=0.0)){
+            zoomToLocation();
+        }
     }
 
 
@@ -93,6 +95,8 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
                 addOutletMapListener.addOutletMapClicked();
             }
         });
+
+
 
         getActivity().invalidateOptionsMenu();
         return thisView;
@@ -183,7 +187,8 @@ public class HomeFR extends Fragment implements OnMapReadyCallback, GoogleMap.On
         longitude = longit;
     }
 
-
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
